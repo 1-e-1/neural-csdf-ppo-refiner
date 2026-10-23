@@ -1,0 +1,381 @@
+{
+  "source_usd": "D:\\work_space\\isaacsim_lab_zbot_6s\\assets\\zbot_6s_new_configured.usd",
+  "articulation_root_body": "/zbot/foot_0",
+  "tcp_prim_path": "/zbot/foot_1/TCP",
+  "tcp_parent_body": "/zbot/foot_1",
+  "joint_names": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4",
+    "joint5",
+    "joint6"
+  ],
+  "chain": [
+    {
+      "name": "joint1",
+      "path": "/zbot/foot_0/joint1",
+      "joint_type": "revolute",
+      "body_from": "/zbot/foot_0",
+      "body_to": "/zbot/b1",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 0
+    },
+    {
+      "name": "FixedJoint1",
+      "path": "/zbot/b1/FixedJoint1",
+      "joint_type": "fixed",
+      "body_from": "/zbot/b1",
+      "body_to": "/zbot/a2",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": null,
+      "angle_sign": 1.0,
+      "controlled_index": -1
+    },
+    {
+      "name": "joint2",
+      "path": "/zbot/a2/joint2",
+      "joint_type": "revolute",
+      "body_from": "/zbot/a2",
+      "body_to": "/zbot/b2",
+      "local_pos_from": [
+        -4.1359030627651384e-25,
+        -2.0286331796921668e-32,
+        0.05299999564886093
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        -4.1359030627651384e-25,
+        -2.0286331796921668e-32,
+        -5.60283641704018e-09
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 1
+    },
+    {
+      "name": "FixedJoint2",
+      "path": "/zbot/b2/FixedJoint2",
+      "joint_type": "fixed",
+      "body_from": "/zbot/b2",
+      "body_to": "/zbot/a3",
+      "local_pos_from": [
+        -3.469446951953614e-18,
+        6.62571608236356e-26,
+        0.05299999564886093
+      ],
+      "local_quat_from_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_pos_to": [
+        -3.469446951953614e-18,
+        6.62571608236356e-26,
+        -2.5033950468156263e-09
+      ],
+      "local_quat_to_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": null,
+      "angle_sign": 1.0,
+      "controlled_index": -1
+    },
+    {
+      "name": "joint3",
+      "path": "/zbot/a3/joint3",
+      "joint_type": "revolute",
+      "body_from": "/zbot/a3",
+      "body_to": "/zbot/b3",
+      "local_pos_from": [
+        9.62881643450271e-17,
+        0.0,
+        0.052999984472990036
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        9.62881643450271e-17,
+        0.0,
+        -1.4305114426349519e-08
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 2
+    },
+    {
+      "name": "FixedJoint3",
+      "path": "/zbot/b3/FixedJoint3",
+      "joint_type": "fixed",
+      "body_from": "/zbot/b3",
+      "body_to": "/zbot/base",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": null,
+      "angle_sign": 1.0,
+      "controlled_index": -1
+    },
+    {
+      "name": "joint4",
+      "path": "/zbot/base/joint4",
+      "joint_type": "revolute",
+      "body_from": "/zbot/base",
+      "body_to": "/zbot/b4",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 3
+    },
+    {
+      "name": "FixedJoint4",
+      "path": "/zbot/b4/FixedJoint4",
+      "joint_type": "fixed",
+      "body_from": "/zbot/b4",
+      "body_to": "/zbot/a5",
+      "local_pos_from": [
+        0.0,
+        -4.778639355921398e-18,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": null,
+      "angle_sign": 1.0,
+      "controlled_index": -1
+    },
+    {
+      "name": "joint5",
+      "path": "/zbot/a5/joint5",
+      "joint_type": "revolute",
+      "body_from": "/zbot/a5",
+      "body_to": "/zbot/b5",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 4
+    },
+    {
+      "name": "FixedJoint5",
+      "path": "/zbot/b5/FixedJoint5",
+      "joint_type": "fixed",
+      "body_from": "/zbot/b5",
+      "body_to": "/zbot/a6",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_pos_to": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quat_to_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": null,
+      "angle_sign": 1.0,
+      "controlled_index": -1
+    },
+    {
+      "name": "joint6",
+      "path": "/zbot/a6/joint6",
+      "joint_type": "revolute",
+      "body_from": "/zbot/a6",
+      "body_to": "/zbot/foot_1",
+      "local_pos_from": [
+        0.0,
+        0.0,
+        0.05299999937415123
+      ],
+      "local_quat_from_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "local_pos_to": [
+        -3.0345730372971502e-09,
+        -5.053579530390018e-25,
+        3.0345730372971502e-09
+      ],
+      "local_quat_to_wxyz": [
+        0.9238795042037964,
+        0.0,
+        -0.3826834261417389,
+        0.0
+      ],
+      "axis": "Z",
+      "angle_sign": 1.0,
+      "controlled_index": 5
+    }
+  ],
+  "tcp_local_position": [
+    0.0,
+    0.0,
+    0.053
+  ],
+  "tcp_local_quaternion_wxyz": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "quaternion_convention": "wxyz",
+  "joint_position_unit": "radian"
+}

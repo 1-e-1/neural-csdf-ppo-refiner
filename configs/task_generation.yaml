@@ -1,0 +1,18 @@
+seed: 42
+min_joint_distance: 0.35
+min_tcp_distance_m: 0.05
+max_resample_attempts: 200
+singularity:
+  enabled: true
+  min_jacobian_singular_value: 0.01
+  max_condition_number: 200.0
+splits:
+  train: 0.8
+  validation: 0.1
+  test: 0.1
+stages:
+  debug: 10
+  validation: 100
+  small: 1000
+  medium: 10000
+  large: 50000

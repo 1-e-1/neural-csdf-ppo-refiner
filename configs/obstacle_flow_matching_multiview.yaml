@@ -1,0 +1,60 @@
+seed: 20260724
+trajectory_shape: [64, 6]
+base_condition_dim: 9
+obstacle_encoder:
+  privileged_token_dim: 14
+  max_obstacles: 5
+  hidden_dim: 128
+  transformer_layers: 3
+  transformer_heads: 4
+vision_encoder:
+  temporal_frames: 2
+  camera_views: 4
+  view_order: [wrist, front, side, top]
+  rgb_channels: 3
+  depth_channels: 1
+  semantic_channels: 1
+  fusion: channel_concat
+  input_channels: 40
+  backbone: resnet18_small_input
+  pretrained: false
+  output_dim: 128
+  latent_distillation_weight: 1.0
+model:
+  hidden_dim: 192
+  num_layers: 4
+  num_heads: 4
+  dropout: 0.1
+  time_embedding_dim: 128
+training:
+  initialization: visual_cfm_v3
+  stages:
+    - multiview_visual_distillation
+    - multiview_visual_finetune
+  optimizer: AdamW
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  distillation_epochs: 40
+  finetune_epochs: 30
+  batch_size: 16
+  mixed_precision: false
+  max_grad_norm: 1.0
+loss_weights:
+  flow: 1.0
+  start_consistency: 10.0
+  final_tcp_position: 5.0
+  velocity_smoothness: 0.1
+  acceleration_smoothness: 0.1
+  jerk_regularization: 0.05
+  duration: 1.0
+  collision_clearance: 2.0
+  obstacle_collision_hard_reject: true
+  dynamic_time_collision_hard_reject: true
+inference:
+  ode_solver: heun
+  ode_steps: 32
+  terminal_ik:
+    enabled: true
+    restarts: 6
+  physx_candidate_screening: true
+  emergency_stop_on_unpredicted_contact: true

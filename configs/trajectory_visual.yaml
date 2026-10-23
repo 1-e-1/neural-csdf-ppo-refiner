@@ -1,0 +1,70 @@
+seed: 20260801
+scene_usd: ../../1111_copy.usd
+trajectory:
+  shape: [64, 6]
+  continuous_joints: true
+  wrapped_angle_range_rad: [-3.141592653589793, 3.141592653589793]
+  interpolation: shortest_angular_displacement
+  control_hz: 50
+  duration_range_s: [1.0, 5.0]
+  velocity_limit_rad_s: [2.0, 2.0, 2.0, 2.5, 2.5, 3.0]
+  acceleration_limit_rad_s2: [8.0, 8.0, 8.0, 10.0, 10.0, 12.0]
+  jerk_limit_rad_s3: [80.0, 80.0, 80.0, 100.0, 100.0, 120.0]
+observation:
+  arm_joint_position_shape: [6]
+  target_position_shape: [3]
+  target_frame: corresponding_arm_foot_0
+  h1_state_readable: false
+  camera_views_per_arm: 4
+  temporal_frames: 2
+  resolution: [128, 128]
+  channels_per_frame: 5
+  left_view_order:
+    - LeftWristCamera
+    - LeftCubeSideCamera
+    - ChestLeftCamera
+    - HeadTopCamera
+  right_view_order:
+    - RightWristCamera
+    - RightCubeSideCamera
+    - ChestRightCamera
+    - HeadTopCamera
+model:
+  type: Visual Conditional Flow Matching
+  initialization: ../../outputs/checkpoints/space_obstacle_visual_commoninit_multiview_v4.pt
+  condition_shape: [9]
+  output_trajectory_shape: [64, 6]
+  output_duration_shape: [1]
+  ode_solver: Heun
+  ode_steps: 32
+  candidates: 64
+training:
+  dataset_samples: 2048
+  validation_samples: 256
+  test_samples: 512
+  batch_size: 16
+  latent_distillation_epochs: 20
+  visual_finetune_epochs: 30
+  learning_rate: 0.00002
+  weight_decay: 0.0001
+  seeds: [20260801, 20260802, 20260803]
+safety:
+  visual_reconstruction_voxel_m: 0.01
+  link_capsule_radius_m: 0.055
+  required_clearance_m: 0.025
+  emergency_stop_clearance_m: 0.015
+  reject_self_collision: true
+  reject_h1_collision: true
+  reject_other_arm_collision: true
+  target_contact_whitelist: gripper_fingers_only
+  online_candidate_selection: visual_geometry_only
+  physx_usage: offline_training_label_and_simulation_evaluation_only
+loss_weights:
+  flow: 1.0
+  terminal_position: 5.0
+  velocity: 0.05
+  acceleration: 0.10
+  jerk: 0.08
+  visual_clearance: 2.0
+  self_collision: 3.0
+  duration: 0.5

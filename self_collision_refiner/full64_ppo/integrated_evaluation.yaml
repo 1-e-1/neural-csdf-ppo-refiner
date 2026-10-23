@@ -1,0 +1,39 @@
+seed: 20260804
+device: cuda:0
+
+sources:
+  visual_selected: ../outputs/evaluation/visual_cfm_five_view_v5_k64_postprocess_selected.npz
+  visual_report: ../outputs/evaluation/visual_cfm_five_view_v5_k64_postprocess.json
+  visual_checkpoint: ../pretrained/visual_cfm_1111_five_view_v5.pt
+  visual_config: ../configs/visual_cfm_transfer_5view.yaml
+  test_dataset: ../data/visual_five_view_v1_merged
+  physx_reference_bank: ../outputs/evaluation/visual_cfm_five_view_v5_physx_bank26.npz
+  robot_limits: ../../configs/robot.yaml
+
+models:
+  csdf_checkpoint: checkpoints/neural_csdf.pt
+  refiner_checkpoint: full64_ppo/checkpoints/trajectory_refiner_full64_ppo.pt
+  refiner_config: full64_ppo/config.yaml
+  kinematic_chain: ../../configs/kinematic_chain.json
+
+terminal_projection:
+  restarts: 32
+  iterations: 300
+  fallback_restarts: 64
+  fallback_iterations: 500
+  position_tolerance_m: 0.003
+
+evaluation:
+  position_tolerance_m: 0.030
+  required_clearance_m: 0.010
+  capsule_radius_m: 0.045
+  environment_capsule_radius_m: 0.050
+  adjacency: 2
+  exact_query_batch_size: 8192
+  continuous_check_max_joint_step_rad: 0.025
+  near_boundary_extra_subdivisions: 2
+
+outputs:
+  report: full64_ppo/outputs/integrated_visual_cfm_full64_ppo_evaluation.json
+  trajectories: full64_ppo/outputs/integrated_visual_cfm_full64_ppo_trajectories_256.npz
+  physx_bank: full64_ppo/outputs/integrated_visual_cfm_full64_ppo_physx_bank26.npz

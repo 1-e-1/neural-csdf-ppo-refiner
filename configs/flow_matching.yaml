@@ -1,0 +1,42 @@
+seed: 42
+condition_dim: 13
+trajectory_shape: [64, 6]
+model:
+  hidden_dim: 256
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  time_embedding_dim: 128
+training:
+  optimizer: AdamW
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  epochs: 200
+  batch_size: auto
+  mixed_precision: true
+  gradient_clipping: true
+  max_grad_norm: 1.0
+  checkpoint_interval_epochs: 10
+loss_weights:
+  flow: 1.0
+  start_consistency: 10.0
+  final_tcp_position: 5.0
+  final_tcp_orientation: 2.0
+  joint_limit: 0.0
+  velocity_smoothness: 0.1
+  acceleration_smoothness: 0.1
+  jerk_regularization: 0.05
+  duration: 1.0
+inference:
+  ode_solver: heun
+  ode_steps: 32
+  enforce_start_equals_q_start: true
+  terminal_ik:
+    enabled: true
+    restarts: 4
+    max_iterations: 80
+    position_weight: 100.0
+    orientation_weight: 20.0
+    regularization_weight: 1.0e-5
+  spline_control_points: 8
+  spline_residual_weight: 0.15

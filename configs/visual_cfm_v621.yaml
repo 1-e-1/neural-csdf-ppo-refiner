@@ -1,0 +1,71 @@
+seed: 20260811
+trajectory_shape: [64, 6]
+base_condition_dim: 15
+condition_layout: [q_start, q_ik, p_goal]
+goal_condition_dof: 6
+periodic_joints: true
+obstacle_encoder:
+  privileged_token_dim: 14
+  max_obstacles: 8
+  hidden_dim: 256
+  transformer_layers: 3
+  transformer_heads: 4
+vision_encoder:
+  temporal_frames: 2
+  camera_views: 5
+  view_order: [wrist, cube, chest, abdomen, head]
+  rgb_channels: 3
+  depth_channels: 1
+  semantic_channels: 1
+  fusion: channel_concat
+  input_channels: 50
+  backbone: resnet18_small_input
+  pretrained: false
+  output_dim: 256
+  condition_cond_dim: 3
+  use_target_heads: true
+  target_type_dim: 5
+  fuse_point_cloud: true
+  point_cloud_classifier: true
+model:
+  hidden_dim: 192
+  num_layers: 4
+  num_heads: 4
+  dropout: 0.1
+  time_embedding_dim: 128
+training:
+  initialization: visual_cfm_v62_left
+  multi_label_experts: 8
+  ik_candidates: 4
+  qik_augmentation: true
+  epochs_per_stage: [60, 40, 20]
+  optimizer: AdamW
+  learning_rate: 2.0e-4
+  finetune_learning_rate: 2.0e-5
+  weight_decay: 0.0001
+  batch_size: 16
+  mixed_precision: false
+  max_grad_norm: 1.0
+loss_weights:
+  flow: 10.0
+  start_consistency: 5.0
+  goal_joint_consistency: 10.0
+  final_tcp_position: 5.0
+  velocity_smoothness: 0.02
+  acceleration_smoothness: 0.02
+  jerk_regularization: 0.01
+  duration: 0.5
+  collision_clearance: 2.0
+  self_collision_clearance: 4.0
+aux_weights:
+  target_component: 2.0
+  object_center: 2.0
+  object_size: 1.0
+  object_type: 1.0
+inference:
+  ode_solver: heun
+  ode_steps: 32
+  candidates: 64
+  ik_first: true
+  ik_candidates: 4
+  online_selection: visual_pointcloud_clearance

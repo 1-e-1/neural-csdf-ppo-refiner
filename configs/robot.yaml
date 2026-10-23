@@ -1,0 +1,33 @@
+project_root: .
+asset:
+  source_usd: assets/zbot_6s_new.usd
+  backup_usd: assets/zbot_6s_new_backup.usd
+  configured_usd: assets/zbot_6s_new_configured.usd
+robot:
+  dof: 6
+  base_must_be_fixed: true
+  controllable_joint_type: revolute
+  joint_names: [joint1, joint2, joint3, joint4, joint5, joint6]
+  continuous_joints: true
+  tcp_name_keywords:
+    - TCP
+    - tcp
+    - tool
+    - ee
+    - end_effector
+    - flange
+joint_space:
+  physical_position_limits: null
+  sampling_distribution: uniform
+  sampling_lower: [-3.141592653589793, -3.141592653589793, -3.141592653589793, -3.141592653589793, -3.141592653589793, -3.141592653589793]
+  sampling_upper: [3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]
+  note: USD Infinity means unbounded joints; this interval is only the task sampling domain.
+planning_soft_limits:
+  note: Numerical trajectory constraints, not validated hardware limits.
+  velocity: [2.0, 2.0, 2.0, 2.5, 2.5, 3.0]
+  acceleration: [8.0, 8.0, 8.0, 10.0, 10.0, 12.0]
+  jerk: [80.0, 80.0, 80.0, 100.0, 100.0, 120.0]
+self_collision:
+  enabled: true
+  adjacent_link_filtering: true
+  validation_samples: 100

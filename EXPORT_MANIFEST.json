@@ -1,0 +1,485 @@
+{
+  "date": "2026-10-24",
+  "owner": "1-e-1",
+  "method": "Neural configuration-space signed-distance field and PPO residual trajectory refinement",
+  "files": [
+    {
+      "path": "configs/ablations.yaml",
+      "source_project": "v62",
+      "source_path": "configs/ablations.yaml",
+      "sha256_original": "cab0a2cfc4c09347150fb4f3c082d8cc0d704a7d6c03afb8d066eb8c4949b372",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/balance.yaml",
+      "source_project": "v62",
+      "source_path": "configs/balance.yaml",
+      "sha256_original": "d4075d118bb759810f0bccebbb2c067ddb33df41814d9ba465c7cab7273c720c",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/dataset.yaml",
+      "source_project": "v62",
+      "source_path": "configs/dataset.yaml",
+      "sha256_original": "aae3131c0b8f217db84cc8bb5d85abbb5c8ca6d011b2a01f4b2013acc8da43ab",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/evaluation.yaml",
+      "source_project": "v62",
+      "source_path": "configs/evaluation.yaml",
+      "sha256_original": "ed092b87659f45ba81d3b24e3595f450016c9e79a85284243da4a1c548567c96",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/flow_matching.yaml",
+      "source_project": "v62",
+      "source_path": "configs/flow_matching.yaml",
+      "sha256_original": "725fa77e7512c22392c8b31468210a5a5b8ef08837589fb558f6e9fd1cd63f4f",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/kinematic_chain.json",
+      "source_project": "v62",
+      "source_path": "configs/kinematic_chain.json",
+      "sha256_original": "a028e53c92ed768398fb81ea14db4f8bdc7a24993928bcd77cb29e49a1dd3a0d",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/obstacle_flow_matching.yaml",
+      "source_project": "v62",
+      "source_path": "configs/obstacle_flow_matching.yaml",
+      "sha256_original": "fedc126f500cb879a67fd9d564ac6d708a5bc4c3d79f83bf2ff1d4c28d8a141d",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/obstacle_flow_matching_highres.yaml",
+      "source_project": "v62",
+      "source_path": "configs/obstacle_flow_matching_highres.yaml",
+      "sha256_original": "56133b08d146c883cfcd78955c51bc5af263bae3b5e4f2e646167f4256f1920f",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/obstacle_flow_matching_multiview.yaml",
+      "source_project": "v62",
+      "source_path": "configs/obstacle_flow_matching_multiview.yaml",
+      "sha256_original": "44a1b80d3f465d29203b05773ef9f354f109e13700c5a6841a2439c744fe428f",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/obstacles.yaml",
+      "source_project": "v62",
+      "source_path": "configs/obstacles.yaml",
+      "sha256_original": "22413a2dcf241557f517d3cfccf3a529fcdd750aa61e36edb18f1cd496d80d00",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/obstacles_highres.yaml",
+      "source_project": "v62",
+      "source_path": "configs/obstacles_highres.yaml",
+      "sha256_original": "3aa3e8e132e4c8851c5296fdbb55db02faabeefb983252a0fd8f37281efbedcf",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/paper_experiment_matrix.yaml",
+      "source_project": "v62",
+      "source_path": "configs/paper_experiment_matrix.yaml",
+      "sha256_original": "afbe64896c92382d3bf2b05849b057919bd9d58de5c1cfd824f5e65ab0fbf07d",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/robot.yaml",
+      "source_project": "v62",
+      "source_path": "configs/robot.yaml",
+      "sha256_original": "fe3352cd0656fad9f7b7e1639c50923616c194cc5d02512ec8bf6bc8ac2642cd",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/task_generation.yaml",
+      "source_project": "v62",
+      "source_path": "configs/task_generation.yaml",
+      "sha256_original": "e690f7ba0c1b75c97ba7d86e8bcd268308716bc7fcfbcab530ab783e963a0da4",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/trajectory_optimizer.yaml",
+      "source_project": "v62",
+      "source_path": "configs/trajectory_optimizer.yaml",
+      "sha256_original": "3809fffeea12d6d40b34c4ff6d9ead9753e03fbcf30943991dad9f8c98a77c60",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/trajectory_visual.yaml",
+      "source_project": "v62",
+      "source_path": "configs/trajectory_visual.yaml",
+      "sha256_original": "edf51663eb0daba47bfd715faadb4f007d943567ea629874c0b36ca815f56693",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_five_view_v5_frozen_manifest.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_five_view_v5_frozen_manifest.yaml",
+      "sha256_original": "4c7610e6568169abaf03dfa09b38df218410eb3106db76bdb0c2994e714b8599",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_transfer.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_transfer.yaml",
+      "sha256_original": "5ccd8e94511716c5457ce205ff762d14b1957ef7b4ec8ab84645cc49ddf5fcfc",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_transfer_4view.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_transfer_4view.yaml",
+      "sha256_original": "5ccd8e94511716c5457ce205ff762d14b1957ef7b4ec8ab84645cc49ddf5fcfc",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_transfer_5view.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_transfer_5view.yaml",
+      "sha256_original": "c15890f70df1a651223fbafd695412c319be71944cce2adffc438f0433755535",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_transfer_5view_v6.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_transfer_5view_v6.yaml",
+      "sha256_original": "3d54f7f1db8e2ca72c60f9a4280918033909da9f995e8e8ee2c134f5e1bf880e",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "configs/visual_cfm_v621.yaml",
+      "source_project": "v62",
+      "source_path": "configs/visual_cfm_v621.yaml",
+      "sha256_original": "d7f8c87e6851741a49f5ecb688d0a436977db537691f13bbc275ba01fed690b4",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/README.md",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/README.md",
+      "sha256_original": "95773abd13c099556b1d91b5304505abebab078033b82518ef8617844d3db928",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/config.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/config.yaml",
+      "sha256_original": "8d31f99c6971af0913fd359970e5cb143f34ac6b3ebc804b758ef892dd62590b",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/config_smoke.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/config_smoke.yaml",
+      "sha256_original": "97f317044c9995e1128ca6e464574ce628ccb2d86c6f6f78a9805ed31ad465ec",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/README.md",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/README.md",
+      "sha256_original": "4aa9f1e88955189e1949cfc6a64e1a16ec36ca0e3ac28af621bcab6bdb60dc1a",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/config.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/config.yaml",
+      "sha256_original": "f0e5bbf3a88eb32e2f11a1d1c28b8134c459659d9e62f34ffe6beb1ac11e630e",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/config_random_1000_v1.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/config_random_1000_v1.yaml",
+      "sha256_original": "27daf0b5b6d8c8e7206aff78dab7753b9bcf7019af321acfb0991f080afdc15e",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/config_smooth_1024_v3.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/config_smooth_1024_v3.yaml",
+      "sha256_original": "7bd6b1c218cdbc88d65d9e19a3af7d44166dd19b53605d425338778270d1e571",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/config_smooth_1024_v4.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/config_smooth_1024_v4.yaml",
+      "sha256_original": "6bb966aecb2740dfeff15df4965f059dd47001460377217636cafed15d716a59",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/config_smooth_v2.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/config_smooth_v2.yaml",
+      "sha256_original": "10bc5237e701baabf9108e675a69cd86a7882ca12182a827b6de72e9443a2905",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/integrated_evaluation.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/integrated_evaluation.yaml",
+      "sha256_original": "d0fee364cd66241544edbcf60ea11c9b8cef485361ccd4fba753c0b7815a1f74",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_1024_v3.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_1024_v3.yaml",
+      "sha256_original": "42848bba29a2b174918f9a8217e045df55929035f6928b1424ac116736e88fc6",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_1024_v4.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_1024_v4.yaml",
+      "sha256_original": "6843f3cd5377b1d839c3471f9d1079f3d0bb959ccc609d5a4849cb2e63c67f61",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_v2.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/integrated_evaluation_smooth_v2.yaml",
+      "sha256_original": "fb9274302c0809ce5e6fdac5a9781d22305431fbd31e68f2e8176fe57e4ad850",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/scripts/_bootstrap.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/scripts/_bootstrap.py",
+      "sha256_original": "f36352ea909334e73d0e0b7d284ab730b19f17efca96e466c50b357c35d64c40",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/scripts/evaluate_full64_ppo.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/scripts/evaluate_full64_ppo.py",
+      "sha256_original": "a8a671ee9109a5b63fbf335e0dc764e2bc9585ac992733c9bdc91766a38f66b1",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/scripts/generate_midcollision_tasks.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/scripts/generate_midcollision_tasks.py",
+      "sha256_original": "26ae5a0c3207d93f86c72d2830a71cfb19e93c10ad4cbafcaa4d6fbfaeb1d4bd",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/scripts/generate_random_endpoint_safe_tasks.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/scripts/generate_random_endpoint_safe_tasks.py",
+      "sha256_original": "7c2bc75eaa22184f569929c1931bae5e3fa7a525e45340e073a0c57443241647",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/full64_ppo/scripts/train_full64_ppo.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/full64_ppo/scripts/train_full64_ppo.py",
+      "sha256_original": "6d112db060a0bd69ca6e6bb56a3496a0b82a98a7b4f5a1e293d297e3899cd370",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/integrated_evaluation.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/integrated_evaluation.yaml",
+      "sha256_original": "d6dd5f583aa0080358b2ff5afb0841e9dc5076cbe31dd4f9e42fd9a3c9b16150",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/integrated_evaluation_v62.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/integrated_evaluation_v62.yaml",
+      "sha256_original": "c870b9a26250691f544322646dc8d8f6b8c822d7edd09e2e5793702c782b58ee",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/integrated_evaluation_v62_random.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/integrated_evaluation_v62_random.yaml",
+      "sha256_original": "77bdf7fa393aaa3ea9bda99c42519327dad1206ab80c4d3524110014fc93252d",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/integrated_evaluation_v62_random_unclipped.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/integrated_evaluation_v62_random_unclipped.yaml",
+      "sha256_original": "0adeae1e1a75c1694b9eaa8f24d566e66db23141bec0ac01d73362c34298be83",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/integrated_evaluation_v62_unclipped.yaml",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/integrated_evaluation_v62_unclipped.yaml",
+      "sha256_original": "b7deb6ebfec92de2a638497c89543e5e8e9a9b1388add68a707a29464638049c",
+      "role": "configuration_or_documentation"
+    },
+    {
+      "path": "self_collision_refiner/scripts/_bootstrap.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/_bootstrap.py",
+      "sha256_original": "e4d4b7711d3a69e0440c333dc6a5cf16717516587f95bdefc6d2cfbb37a697a6",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/scripts/evaluate_integrated_pipeline.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/evaluate_integrated_pipeline.py",
+      "sha256_original": "f0faaaf7846f35f84aa67ded6ac8f793e42994a933010fd3a5be12d908b1878c",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/scripts/generate_csdf_dataset.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/generate_csdf_dataset.py",
+      "sha256_original": "dcacdef9a84f3d9654df9f250da198fd634eff088312d794907e2366a11b4f7f",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/scripts/refine_trajectory.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/refine_trajectory.py",
+      "sha256_original": "01ed6b713ad94668e3b79749d13476ff626c88f015cd8488980d9a98df01fcaa",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/scripts/train_csdf.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/train_csdf.py",
+      "sha256_original": "f883cd1807e1e45acf9c84d8527b6b8a987de85057e16a9054d426588f08ce9e",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/scripts/train_refiner_ppo.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/scripts/train_refiner_ppo.py",
+      "sha256_original": "bcda34112cc3f4b181e2292ba9cc010dcc7a8ee0980629ad031db74d9f06ceb3",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/__init__.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/__init__.py",
+      "sha256_original": "a11a7ced218e9e910dca56bd9a5a002fc941ed0a2640a2d46c2320b9d2a4f543",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/csdf_data.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/csdf_data.py",
+      "sha256_original": "b16ef3f2c92284e6d10b0d4a078de2c068d8f40e9bb5932d2624cab7e74ef17c",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/csdf_training.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/csdf_training.py",
+      "sha256_original": "006fd59374999ff2c945aece8a7b78ca5ccc888b7363665c4d27a0879fc877ab",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/geometry.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/geometry.py",
+      "sha256_original": "15654c434083d903fca25438266e1f503602f23c9ab6797f4fb8a1f0241d24ff",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/models.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/models.py",
+      "sha256_original": "bca58b2c68488fd627cf8bc115cfad77455f9780ea7fea4f614d06687b3bdcec",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/ppo.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/ppo.py",
+      "sha256_original": "b8f71413a34a899303e56da48a1aee73489a456409883208c5415a5e3d440695",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/self_collision_refiner/trajectory_env.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/self_collision_refiner/trajectory_env.py",
+      "sha256_original": "bf457e10bf0646b4a8a56e64f8f1f41cfa82b868a0d0310436372086c09a5ddd",
+      "role": "primary"
+    },
+    {
+      "path": "self_collision_refiner/tests/test_self_collision_refiner.py",
+      "source_project": "v62",
+      "source_path": "self_collision_refiner/tests/test_self_collision_refiner.py",
+      "sha256_original": "e50a4d55f72ed2fa3bf8a4aa12eb46098466fb23339f62ce12753d5f151ed372",
+      "role": "primary"
+    },
+    {
+      "path": "src/__init__.py",
+      "source_project": "v62",
+      "source_path": "src/__init__.py",
+      "sha256_original": "5bba6780c2e87a9b95927433d92c1c0e8d8ad2650c3edde0838850f67932039e",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/h1_1111_grasp/__init__.py",
+      "source_project": "v62",
+      "source_path": "src/h1_1111_grasp/__init__.py",
+      "sha256_original": "4788b266c61da470e79f88ad26fdaad052c258916e4c3c8cbe3a12a8a1ad0167",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/h1_1111_grasp/trajectory_safety.py",
+      "source_project": "v62",
+      "source_path": "src/h1_1111_grasp/trajectory_safety.py",
+      "sha256_original": "74c8ff9e758eb76faca967f915434fea49320261c3069b442ff2851283b7a1f6",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/planning/__init__.py",
+      "source_project": "v62",
+      "source_path": "src/planning/__init__.py",
+      "sha256_original": "6ee4f049a3fa38459f24c7a130d6d04371173ef0cdc194f51bc24dcc47825b74",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/planning/flow_postprocess.py",
+      "source_project": "v62",
+      "source_path": "src/planning/flow_postprocess.py",
+      "sha256_original": "e7e218e827536bed963e279da829daa577cb130f26b269ca920cd993c6b22027",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/planning/trajectory_math.py",
+      "source_project": "v62",
+      "source_path": "src/planning/trajectory_math.py",
+      "sha256_original": "441bff3011c81cd3898956ec2fc4273b4a5679c72263c607027c3f3ac100721d",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/robot/__init__.py",
+      "source_project": "v62",
+      "source_path": "src/robot/__init__.py",
+      "sha256_original": "bad905f899839daff8884c7d7d4e1e18f0924fa04f47ae8db75d0c8488913859",
+      "role": "shared_dependency"
+    },
+    {
+      "path": "src/robot/torch_kinematics.py",
+      "source_project": "v62",
+      "source_path": "src/robot/torch_kinematics.py",
+      "sha256_original": "f48dbac17c62dd2c801067b4995640304a7a2803da7e7ad4dff61b3cc3caee76",
+      "role": "shared_dependency"
+    }
+  ],
+  "portability_edits": [
+    "configs/paper_experiment_matrix.yaml",
+    "configs/robot.yaml",
+    "self_collision_refiner/integrated_evaluation_v62.yaml",
+    "self_collision_refiner/integrated_evaluation_v62_random.yaml",
+    "self_collision_refiner/integrated_evaluation_v62_random_unclipped.yaml",
+    "self_collision_refiner/integrated_evaluation_v62_unclipped.yaml"
+  ],
+  "note": "Source hashes refer to original files before export-only path edits. Generated publication files are additional."
+}

@@ -1,0 +1,80 @@
+seed: 20260802
+device: cuda:0
+
+geometry:
+  kinematic_chain: ../../configs/kinematic_chain.json
+  capsule_radius_m: 0.045
+  adjacency: 2
+  required_clearance_m: 0.010
+  exact_query_batch_size: 8192
+  continuous_check_max_joint_step_rad: 0.025
+  near_boundary_extra_subdivisions: 2
+
+csdf_dataset:
+  samples: 65536
+  collision_margin_m: 0.010
+  boundary_width_m: 0.030
+  boundary_fraction: 0.35
+  target_safe_fraction: 0.25
+  perturbation_std_rad: 0.10
+  output: data/cspace_self_collision.npz
+  report: outputs/cspace_dataset_report.json
+
+csdf_training:
+  hidden_dims: [256, 256, 128]
+  epochs: 60
+  batch_size: 1024
+  learning_rate: 0.0003
+  weight_decay: 0.00001
+  validation_fraction: 0.15
+  clearance_loss_weight: 1.0
+  collision_loss_weight: 0.25
+  boundary_weight_gain: 4.0
+  boundary_temperature_m: 0.030
+  clearance_scale_m: 0.10
+  checkpoint: checkpoints/neural_csdf.pt
+  report: outputs/neural_csdf_training.json
+
+refiner:
+  source_dataset: ../data/visual_five_view_v1_merged
+  max_source_trajectories: 1638
+  input_points: 64
+  output_points: 256
+  control_points: 16
+  episode_steps: 4
+  action_step_rad: 0.10
+  max_residual_rad: 0.45
+  initial_corruption_rad: 0.65
+  required_clearance_m: 0.010
+  gamma: 0.99
+  reward_weights:
+    clearance: 1.0
+    collision_fraction: 3.0
+    deviation: 0.20
+    acceleration: 0.08
+    jerk: 0.02
+    action: 0.01
+    success: 5.0
+
+ppo:
+  environments: 128
+  updates: 500
+  hidden_dim: 384
+  initial_std: 0.35
+  learning_rate: 0.00015
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_ratio: 0.20
+  value_weight: 0.50
+  entropy_weight: 0.002
+  ppo_epochs: 4
+  minibatch_size: 256
+  max_grad_norm: 1.0
+  checkpoint: checkpoints/trajectory_refiner_ppo.pt
+  report: outputs/trajectory_refiner_ppo_training.json
+
+inference:
+  input: ../outputs/evaluation/visual_cfm_five_view_v5_k64_postprocess_selected.npz
+  sample_index: 0
+  output: outputs/refined_trajectory_256.npz
+  report: outputs/refined_trajectory_256_report.json

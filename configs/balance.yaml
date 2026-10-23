@@ -1,0 +1,19 @@
+seed: 20260801
+simulation:
+  dt: 0.005
+  decimation: 4
+  control_hz: 50
+training:
+  num_envs: 512
+  payload_iterations: 300
+  manipulation_iterations: 700
+  robust_iterations: 500
+evaluation:
+  num_envs: 64
+  duration_s: 20.0
+  seeds: [20260801, 20260802, 20260803]
+disturbance:
+  force_n: 45.0
+  torque_nm: 20.0
+  push_velocity_mps: 0.45
+

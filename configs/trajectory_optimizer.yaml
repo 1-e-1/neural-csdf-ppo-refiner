@@ -1,0 +1,30 @@
+trajectory:
+  points: 64
+  control_frequency_hz: 50
+  min_duration_s: 0.8
+  max_duration_s: 5.0
+  dense_collision_substeps: 4
+optimization:
+  optimizer: scipy_slsqp
+  max_iterations: 120
+  num_initializations: 4
+  bspline_control_points: 8
+  finite_difference_eps: 1.0e-4
+weights:
+  w_task_position: 100.0
+  w_task_orientation: 20.0
+  w_joint_length: 1.0
+  w_tcp_length: 1.0
+  w_motion_proxy: 0.5
+  w_velocity: 2.0
+  w_acceleration: 1.0
+  w_jerk: 0.2
+  w_duration: 20.0
+  w_joint_limit: 0.0
+motion_cost_proxy:
+  joint_weights: [1.0, 1.0, 1.0, 0.7, 0.7, 0.5]
+baselines:
+  linear: true
+  minimum_jerk: true
+self_collision:
+  hard_reject: true

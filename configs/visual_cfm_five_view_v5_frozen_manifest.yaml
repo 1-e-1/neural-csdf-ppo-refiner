@@ -1,0 +1,17 @@
+version: visual_cfm_five_view_v5_frozen_20260803
+policy:
+  cfm_retraining_allowed: false
+  duration_head_frozen: true
+  dataset_mutation_allowed: false
+checkpoint:
+  path: ../pretrained/visual_cfm_1111_five_view_v5.pt
+  sha256: ce34e4c902de9fa9fbeaf92203d97b7f4d8d281b817a52bc835a971851fe9ec5
+dataset:
+  root: ../data/visual_five_view_v1_merged
+  files:
+    - path: train_shard_00000.npz
+      sha256: 057cf2f2e0c145146656494f5960102f3081f37307fb73d229379c8c1797151a
+    - path: validation_shard_00000.npz
+      sha256: 84766e59b54ae504ecde40012eeda94c2424713e49b0aae0daf7cf21eace258e
+    - path: test_shard_00000.npz
+      sha256: 818b3098f0ae77d3d0ec433b3389c822f7d88ce1a504b53502061bd5268c73f8

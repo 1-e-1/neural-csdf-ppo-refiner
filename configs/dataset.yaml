@@ -1,0 +1,33 @@
+format: npz_shards
+shard_size: 256
+trajectory_points: 64
+output_dirs:
+  debug: data/debug
+  train: data/train
+  validation: data/validation
+  test: data/test
+metadata_dir: outputs/logs
+required_fields:
+  - sample_id
+  - seed
+  - q_start
+  - q_goal
+  - start_tcp_pose
+  - goal_tcp_pose
+  - time
+  - duration
+  - q
+  - dq
+  - ddq
+  - dddq
+  - joint_path_length
+  - tcp_path_length
+  - motion_cost_proxy
+  - position_error
+  - orientation_error
+  - max_velocity
+  - max_acceleration
+  - jerk_rms
+  - planning_time
+  - collision_free
+  - optimizer_status

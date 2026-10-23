@@ -1,0 +1,159 @@
+paper_title: 面向航天员辅助机械臂的视觉引导多候选低冲击避障轨迹生成方法
+seed: 20260724
+isaacsim_python: python
+project_root: .
+
+datasets:
+  main_obstacle:
+    path: data/space_obstacle_large_v2
+    description: 随机起点、随机目标 TCP、随机静态障碍、动态障碍和太空碎石障碍。
+  main_obstacle_vision:
+    path: data/space_obstacle_large_v2_vision
+    description: 与 main_obstacle 同源，并增加腕部 RGB-D-semantic 视觉观测。
+
+metrics:
+  success_rate: 到达目标且 PhysX / OBB 碰撞检测均无碰撞的比例。
+  collision_rate: 轨迹候选在物理筛选阶段出现碰撞的比例。
+  minimum_clearance_m: 机械臂与障碍物之间的最小预测安全间隙。
+  position_error_m: 末端 TCP 到目标位置的最终误差。
+  joint_path_length_l1_rad: 关节轨迹 L1 路径长度。
+  motion_cost_proxy: 关节速度平方积分，作为能耗代理指标。
+  max_abs_velocity_rad_s: 最大关节速度。
+  max_abs_acceleration_rad_s2: 最大关节加速度。
+  max_abs_jerk_rad_s3: 最大关节加加速度 jerk，作为机械冲击代理指标。
+  elapsed_s: 评估总耗时。
+
+main_experiments:
+  - id: expert_oracle
+    status: measured_from_evaluation_logs
+    purpose: 专家轨迹上限，用于确认任务本身可解。
+  - id: direct_minimum_jerk
+    status: measured_from_evaluation_logs
+    purpose: 不避障的 minimum-jerk 直接插值基线。
+  - id: privileged_cfm_full_test
+    status: completed
+    output: outputs/logs/space_obstacle_large_v2_evaluation.json
+    purpose: 使用真值障碍 token 的轨迹生成基线。
+  - id: privileged_safety_guided_50
+    status: completed
+    output: outputs/logs/space_obstacle_safety_vision_v3/privileged_guided_eval_50.json
+    purpose: 真值障碍 token + 安全引导采样 + 多候选筛选。
+  - id: visual_safety_guided_50
+    status: completed
+    output: outputs/logs/space_obstacle_safety_vision_v3/visual_guided_eval_50.json
+    purpose: 腕部视觉 + 安全引导采样 + 多候选筛选。
+
+required_ablations:
+  - id: candidate_count_k
+    status: completed_legacy_audited_component
+    values: [1, 4, 8, 16, 32, 64]
+    purpose: 验证多路径候选数量对成功率、碰撞率和耗时的影响。
+    audit_note: 旧版元数据标记为视觉，实际走 privileged-token 分支；只用于多候选组件结论。
+    command_template: >
+      D:\conda_envs\env_isaaclab\python.exe scripts/evaluate_obstacle_flow.py
+      --data-dir data/space_obstacle_large_v2_vision
+      --checkpoint outputs/checkpoints/space_obstacle_visual_v3.pt
+      --vision --max-tasks 100 --candidates {K} --physx-candidates 8
+      --safety-guidance-steps 12
+      --output outputs/logs/paper_ablations/visual_k{K}.json
+  - id: safety_guidance_steps
+    status: completed_legacy_audited_component
+    values: [0, 4, 8, 12, 20]
+    purpose: 验证碰撞损失 / 安全引导采样对避障性能的贡献。
+    audit_note: 只用于安全引导组件结论，不作为视觉证据。
+    command_template: >
+      D:\conda_envs\env_isaaclab\python.exe scripts/evaluate_obstacle_flow.py
+      --data-dir data/space_obstacle_large_v2_vision
+      --checkpoint outputs/checkpoints/space_obstacle_visual_v3.pt
+      --vision --max-tasks 100 --candidates 32 --physx-candidates 8
+      --safety-guidance-steps {G}
+      --output outputs/logs/paper_ablations/visual_guidance{G}.json
+  - id: observation_source
+    status: completed_with_protocol_difference
+    values: [privileged_tokens, wrist_rgbd_semantic]
+    purpose: 验证视觉闭环相对真值障碍状态输入的性能差距。
+    completed_outputs:
+      - outputs/logs/paper_ablations/privileged_g12_k32_100.json
+      - outputs/logs/commoninit_camera_ablation/wrist_clean_100.json
+      - outputs/logs/commoninit_camera_ablation/wrist_direct_visual_100.json
+    audit_note: privileged 使用 G12，修复后视觉使用 G0；用于系统角色分析，不作为严格单变量对照。
+  - id: collision_aware_finetune
+    status: completed
+    values: [base_cfm, collision_aware_cfm]
+    purpose: 验证碰撞损失与安全微调对安全率的贡献。
+    completed_outputs:
+      - outputs/logs/paper_ablations/collision_base_g12_k32_100.json
+      - outputs/logs/paper_ablations/privileged_g12_k32_100.json
+  - id: smooth_low_impact_losses
+    status: completed
+    values: [full_loss, no_velocity_acceleration_jerk, no_jerk_only]
+    purpose: 验证速度、加速度、jerk 正则对低冲击轨迹的贡献。
+    completed_outputs:
+      - outputs/logs/paper_ablations/privileged_g12_k32_100.json
+      - outputs/logs/paper_ablations/impact_no_jerk_100.json
+      - outputs/logs/paper_ablations/impact_no_smooth_100.json
+  - id: postprocess_components
+    status: completed_legacy_audited_component
+    values: [full, no_terminal_ik, no_physx_screening, no_spline_smoothing]
+    purpose: 验证终端 IK、多候选 PhysX 筛选和平滑时间参数化的作用。
+    audit_note: 旧版 full/no_* 运行实际使用 token-conditioned 分支，只用于后处理组件结论。
+  - id: obstacle_type_generalization
+    status: completed_mixed_all_only
+    values: [static_only, dynamic_only, mixed, space_debris]
+    purpose: 按障碍类型统计成功率和低冲击指标，支撑航天碎石避障叙事。
+    audit_note: 当前 test split 的 409 条任务全部为 static+dynamic+debris mixed_all，不能声称单类别泛化。
+  - id: visual_robustness
+    status: invalidated_requires_corrected_rerun
+    values: [clean, rgb_noise, depth_noise, dropout, camera_pose_jitter]
+    purpose: 验证摄像头噪声、深度缺失和外参扰动下的稳健性。
+    audit_note: RGB/depth/dropout 因旧视觉分支缺陷失效；shift4 缺少同 checkpoint 修复后 clean 配对。
+  - id: camera_count
+    status: completed_corrected_visual
+    values: [wrist, wrist_front_side_top]
+    purpose: 共同初始化条件下比较单腕与四相机 early fusion。
+    completed_outputs:
+      - outputs/logs/commoninit_camera_ablation/comparison_summary.json
+  - id: stochastic_candidate_seed
+    status: completed_legacy_audited_component
+    values: [20260724, 20260725, 20260726]
+    purpose: 评估候选采样随机性。
+    audit_note: 不是模型训练 seed，也不是修复后的视觉 seed 实验。
+  - id: full_test_split
+    status: completed_legacy_audited_component
+    values: [409]
+    purpose: 检查规划与安全后端在完整 test split 上的规模稳定性。
+    audit_note: 旧版实际走 token-conditioned 分支，不能作为 409-task 视觉结果。
+
+recommended_tables:
+  - 主结果表：Expert / Minimum-Jerk / Privileged / Privileged+Safety / Visual+Safety。
+  - 多候选消融表：K=1/4/8/16/32/64。
+  - 安全引导消融表：guidance steps=0/4/8/12/20。
+  - 平滑低冲击消融表：Full / no smooth / no jerk。
+  - 障碍类型泛化表：静态、多动态、太空碎石、混合场景。
+  - 视觉鲁棒性表：clean/noisy/dropout/camera jitter。
+
+deployment_bridge_experiments:
+  - id: fixed3_camera_geometry_shield
+    status: completed_corrected_visual
+    split: test
+    seed: 42
+    tasks: 100
+    candidate_count: 32
+    trajectory_generator_observation: wrist_rgbd_semantic
+    safety_observation: fixed_front_side_top_rgbd_semantic
+    geometry_source: calibrated_depth_backprojection_and_aabb_tracking
+    physx_role: final_selected_trajectory_evaluation_only
+    output: outputs/logs/fixed_camera_safety/wrist_navigation_fixed3_camera_shield_100.json
+    summary: outputs/logs/fixed_camera_safety/comparison_summary.json
+    result:
+      success_rate: 0.50
+      direct_visual_success_rate: 0.41
+      privileged_shield_success_rate: 0.78
+      direct_vs_fixed3_exact_mcnemar_p: 0.14961278438568115
+      reconstruction_recall: 0.8805970149253731
+      mean_center_error_m: 0.007817243246957659
+      mean_aabb_iou: 0.21787979491824402
+    audit_note: >
+      Candidate ranking does not use obstacle pose, size, or velocity ground truth.
+      PhysX is called once after selection and cannot trigger candidate retry.
+      Semantic masks remain Isaac Sim ground truth and are a sim-to-real limitation.

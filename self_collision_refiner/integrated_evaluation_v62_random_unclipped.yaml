@@ -1,0 +1,45 @@
+seed: 20260806
+device: cuda:0
+
+sources:
+  visual_selected: outputs/v62_random_left_selected.npz
+  visual_report: outputs/eval_v62_random_left.json
+  visual_checkpoint: outputs/checkpoints/visual_cfm_v62_left.pt
+  visual_config: ../configs/visual_cfm_transfer_5view_v6.yaml
+  test_dataset: ../data/visual_v6_random_test/left_test
+  robot_limits: ../../configs/robot.yaml
+  physx_reference_bank: outputs/visual_cfm_v62_random_physx_bank.npz
+
+models:
+  csdf_checkpoint: checkpoints/neural_csdf.pt
+  refiner_checkpoint: checkpoints/trajectory_refiner_ppo.pt
+  kinematic_chain: ../../configs/kinematic_chain.json
+
+terminal_projection:
+  restarts: 32
+  iterations: 300
+  fallback_restarts: 64
+  fallback_iterations: 500
+  position_tolerance_m: 0.003
+
+evaluation:
+  position_tolerance_m: 0.030
+  required_clearance_m: 0.010
+  capsule_radius_m: 0.045
+  environment_capsule_radius_m: 0.050
+  adjacency: 2
+  exact_query_batch_size: 8192
+  continuous_check_max_joint_step_rad: 0.025
+  near_boundary_extra_subdivisions: 2
+  time_scaling:
+    timing_points: 256
+    min_duration_s: 0.8
+    nominal_max_duration_s: 5.0
+    max_output_duration_s: 30.0
+    retime_after_terminal_projection: true
+    retime_after_ppo: true
+
+outputs:
+  report: outputs/integrated_visual_cfm_v62_random_unclipped_refiner_evaluation.json
+  trajectories: outputs/integrated_visual_cfm_v62_random_unclipped_refiner_trajectories_256.npz
+  physx_bank: outputs/integrated_visual_cfm_v62_random_unclipped_physx_bank26.npz

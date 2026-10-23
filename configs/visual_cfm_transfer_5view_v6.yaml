@@ -1,0 +1,69 @@
+# Visual CFM v6.2: IK-conditioned multi-label flow matching + terminal anchor + expert re-anchor (h1_1111_grasp)
+seed: 20260805
+trajectory_shape: [64, 6]
+base_condition_dim: 15
+condition_layout: [q_start, q_ik, p_goal]
+goal_condition_dof: 6
+periodic_joints: true
+joint_sampling_range_rad: [-3.141592653589793, 3.141592653589793]
+obstacle_encoder:
+  privileged_token_dim: 14
+  max_obstacles: 5
+  hidden_dim: 256
+  transformer_layers: 3
+  transformer_heads: 4
+vision_encoder:
+  temporal_frames: 2
+  camera_views: 5
+  view_order: [wrist, cube, chest, abdomen, head]
+  rgb_channels: 3
+  depth_channels: 1
+  semantic_channels: 1
+  semantic_id_range: [0, 8]
+  fusion: channel_concat
+  input_channels: 50
+  backbone: resnet18_small_input
+  pretrained: false
+  output_dim: 256
+  latent_distillation_weight: 1.0
+model:
+  hidden_dim: 192
+  num_layers: 4
+  num_heads: 4
+  dropout: 0.1
+  time_embedding_dim: 128
+training:
+  initialization: null
+  multi_label_experts: 8
+  ik_candidates: 4
+  qik_augmentation: true
+  epochs_per_stage: [200, 100]
+  optimizer: AdamW
+  learning_rate: 0.00002
+  weight_decay: 0.0001
+  batch_size: 16
+  mixed_precision: false
+  max_grad_norm: 1.0
+loss_weights:
+  flow: 10.0
+  start_consistency: 5.0
+  goal_joint_consistency: 10.0
+  final_tcp_position: 5.0
+  velocity_smoothness: 0.02
+  acceleration_smoothness: 0.02
+  jerk_regularization: 0.01
+  duration: 0.5
+  collision_clearance: 2.0
+  self_collision_clearance: 4.0
+inference:
+  ode_solver: heun
+  ode_steps: 32
+  candidates: 64
+  ik_first: true
+  ik_candidates: 4
+  online_selection: visual_pointcloud_clearance
+  physx: offline_label_and_simulation_evaluation_only
+data:
+  target_samples_per_arm: 4096
+  goals_per_image: 4
+  goal_distance_buckets: 3

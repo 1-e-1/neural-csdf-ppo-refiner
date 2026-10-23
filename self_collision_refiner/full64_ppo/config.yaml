@@ -1,0 +1,72 @@
+seed: 20260806
+device: cuda:0
+
+models:
+  csdf_checkpoint: ../checkpoints/neural_csdf.pt
+  kinematic_chain: ../../../configs/kinematic_chain.json
+
+task_generation:
+  source_dataset: ../../data/visual_five_view_v1_merged
+  train_split: train
+  test_split: test
+  train_tasks: 4096
+  test_tasks: 512
+  proposal_batch_size: 512
+  maximum_attempt_batches: 80
+  perturbation_amplitude_rad: [0.15, 0.90]
+  perturbation_radius_points: [4, 16]
+  accepted_clearance_range_m: [-0.010, 0.009]
+  train_output: data/midcollision_train.npz
+  test_output: data/midcollision_test.npz
+  report: outputs/midcollision_task_generation.json
+
+geometry:
+  capsule_radius_m: 0.045
+  adjacency: 2
+  required_clearance_m: 0.010
+  exact_query_batch_size: 8192
+  continuous_check_max_joint_step_rad: 0.025
+  near_boundary_extra_subdivisions: 2
+
+refiner:
+  input_points: 64
+  output_points: 256
+  control_points: 64
+  episode_steps: 4
+  action_step_rad: 0.10
+  max_residual_rad: 0.45
+  initial_corruption_rad: 0.0
+  required_clearance_m: 0.010
+  gamma: 0.99
+  reward_weights:
+    clearance: 1.0
+    collision_fraction: 3.0
+    deviation: 0.20
+    acceleration: 0.08
+    jerk: 0.02
+    action: 0.01
+    success: 5.0
+
+ppo:
+  environments: 256
+  updates: 2000
+  hidden_dim: 768
+  initial_std: 0.35
+  learning_rate: 0.00010
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_ratio: 0.20
+  value_weight: 0.50
+  entropy_weight: 0.002
+  ppo_epochs: 6
+  minibatch_size: 512
+  max_grad_norm: 1.0
+  checkpoint: checkpoints/trajectory_refiner_full64_ppo.pt
+  report: outputs/trajectory_refiner_full64_ppo_training.json
+
+evaluation:
+  input: data/midcollision_test.npz
+  output: outputs/midcollision_test_refined_256.npz
+  report: outputs/trajectory_refiner_full64_ppo_evaluation.json
+  batch_size: 64
+  robot_limits: ../../../configs/robot.yaml

@@ -1,0 +1,23 @@
+seed: 123
+num_test_tasks: 1000
+methods:
+  - linear
+  - minimum_jerk
+  - expert
+  - flow_matching
+thresholds:
+  position_error_m: 0.02
+  orientation_error_rad: 0.08
+outputs:
+  results_csv: outputs/evaluation/results.csv
+  summary_json: outputs/evaluation/summary.json
+  figures_dir: outputs/figures
+plots:
+  joint_position: true
+  joint_velocity: true
+  joint_acceleration: true
+  joint_jerk: true
+  tcp_3d_path: true
+  metric_comparison: true
+  success_cases: true
+  failure_cases: true

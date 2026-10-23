@@ -1,0 +1,45 @@
+seed: 42
+dataset: data/medium
+evaluation_tasks: 1000
+groups:
+  full:
+    description: 完整 CFM、Heun、终端 IK、多解 PhysX 筛选和平滑时间参数化
+    terminal_ik: true
+    physx_multisolution_screening: true
+    spline_residual_weight: 0.15
+    ode_solver: heun
+  raw_cfm:
+    description: 不做终端 IK 与样条后处理，用于测量生成模型原始轨迹质量
+    terminal_ik: false
+    physx_multisolution_screening: false
+    spline_residual_weight: null
+    ode_solver: heun
+  no_multisolution_screening:
+    description: 只采用终点误差最小的单个 IK 解
+    terminal_ik: true
+    physx_multisolution_screening: false
+    spline_residual_weight: 0.15
+    ode_solver: heun
+  no_flow_residual:
+    description: 终端 IK 之间只使用 minimum-jerk 参考，不保留 CFM 路径残差
+    terminal_ik: true
+    physx_multisolution_screening: true
+    spline_residual_weight: 0.0
+    ode_solver: heun
+  euler_solver:
+    description: 仅将 ODE 求解器由 Heun 替换为 Euler
+    terminal_ik: true
+    physx_multisolution_screening: true
+    spline_residual_weight: 0.15
+    ode_solver: euler
+  no_terminal_fk_losses:
+    description: 训练时去除 TCP 位置和姿态 FK 辅助损失
+    loss_overrides:
+      final_tcp_position: 0.0
+      final_tcp_orientation: 0.0
+  no_smoothness_losses:
+    description: 训练时去除速度、加速度和 jerk 正则项
+    loss_overrides:
+      velocity_smoothness: 0.0
+      acceleration_smoothness: 0.0
+      jerk_regularization: 0.0

@@ -1,0 +1,76 @@
+seed: 20260809
+device: cuda:0
+
+models:
+  csdf_checkpoint: ../checkpoints/neural_csdf.pt
+  kinematic_chain: ../../../configs/kinematic_chain.json
+
+task_generation:
+  train_output: data/midcollision_train.npz
+  test_output: data/midcollision_test.npz
+
+geometry:
+  capsule_radius_m: 0.045
+  adjacency: 2
+  required_clearance_m: 0.010
+  exact_query_batch_size: 8192
+  continuous_check_max_joint_step_rad: 0.025
+  near_boundary_extra_subdivisions: 2
+
+refiner:
+  input_points: 64
+  output_points: 1024
+  control_points: 64
+  derivative_reference_points: 256
+  episode_steps: 8
+  action_step_rad: 0.04
+  max_residual_rad: 0.45
+  initial_corruption_rad: 0.0
+  required_clearance_m: 0.010
+  gamma: 0.99
+  proxy_scales:
+    acceleration: 0.000010
+    jerk: 0.000005
+    oscillation: 0.000050
+  reward_weights:
+    clearance: 1.5
+    collision_fraction: 3.0
+    deviation: 0.50
+    acceleration: 0.60
+    jerk: 0.40
+    oscillation: 1.00
+    action: 0.02
+    action_oscillation: 0.05
+    success: 5.0
+
+ppo:
+  environments: 64
+  updates: 3000
+  hidden_dim: 768
+  initial_std: 0.25
+  learning_rate: 0.00004
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_ratio: 0.20
+  value_weight: 0.50
+  entropy_weight: 0.001
+  ppo_epochs: 6
+  minibatch_size: 256
+  max_grad_norm: 1.0
+  initialize_from: checkpoints/trajectory_refiner_full64_smooth_v2.pt
+  checkpoint: checkpoints/trajectory_refiner_full64_smooth_1024_v3.pt
+  report: outputs/trajectory_refiner_full64_smooth_1024_v3_training.json
+
+evaluation:
+  input: data/midcollision_test.npz
+  output: outputs/midcollision_test_smooth_1024_v4_retimed.npz
+  report: outputs/trajectory_refiner_full64_smooth_1024_v4_retimed_evaluation.json
+  batch_size: 64
+  dynamics_reference_points: 1024
+  robot_limits: ../../../configs/robot.yaml
+  time_scaling:
+    retime_after_refinement: true
+    timing_points: 1024
+    min_duration_s: 0.8
+    nominal_max_duration_s: 5.0
+    max_output_duration_s: 30.0
